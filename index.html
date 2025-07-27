@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마음부자 만들기 | 무의식 정화를 통한 삶의 변화</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        :root {
+            --primary-color: #5F9EA0; /* 진한 하늘색 */
+            --secondary-color: #FFFFFF; /* 흰색 */
+            --accent-color: #2F4F4F;   /* 짙은회색 */
+            --text-color: #333333;
+            --light-gray: #f4f4f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+            line-height: 1.6;
+            word-break: keep-all;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 섹션 기본 스타일 */
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1, h2, h3 {
+            font-weight: 300; /* 얇은 제목 */
+            letter-spacing: -0.5px;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #1a2a2a;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            margin-left: 15px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+        }
+        
+
+        /* 히어로 섹션 */
+        #hero {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 70px; /* 헤더 높이만큼 여백 추가 */
+        }
+
+        #hero h1 {
+            color: var(--secondary-color);
+            font-weight: 400;
+        }
+
+        #hero p {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+
+
+        /* 문제 제기 섹션 */
+        #problem {
+            background-color: var(--light-gray);
+        }
+
+        .problem-cards {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .problem-card {
+            background: var(--secondary-color);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            width: 31%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+        
+        .problem-card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        /* 해결 제안 섹션 */
+        .solution-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .solution-step {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .solution-step .arrow {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .solution-step h3 {
+            margin-top: 15px;
+            color: var(--accent-color);
+        }
+
+        .solution-box {
+            border: 1px solid #ddd;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: var(--light-gray);
+        }
+
+        /* 기능 및 혜택 섹션 */
+        #features {
+            background-color: var(--light-gray);
+        }
+
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--secondary-color);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* 후기 섹션 */
+        .testimonial-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--light-gray);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .testimonial-card p {
+            font-style: italic;
+        }
+
+        .testimonial-card .author {
+            font-weight: bold;
+            text-align: right;
+            color: var(--accent-color);
+        }
+
+        /* CTA 섹션 */
+        #cta {
+            background-color: var(--primary-color);
+            text-align: center;
+            color: var(--secondary-color);
+        }
+
+        #cta h2 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        #cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* 푸터 */
+        #footer {
+            background-color: var(--accent-color);
+            color: var(--secondary-color);
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            margin-top: 20px;
+            opacity: 0.7;
+        }
+
+        /* 헤더 스타일 */
+        .header {
+            background-color: var(--secondary-color);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.8;
+        }
+
+        .header-cta {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .header-cta:hover {
+            background-color: #4a7a7c;
+            transform: translateY(-2px);
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 1024px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            #hero { height: auto; padding: 120px 20px; }
+            section { padding: 60px 0; }
+            .problem-cards { flex-direction: column; }
+            .problem-card { width: 100%; }
+            .solution-flow { flex-direction: column; }
+            .solution-step .arrow { transform: rotate(90deg); margin: 20px 0; }
+            .feature-cards { grid-template-columns: 1fr; }
+            
+            /* 모바일 헤더 */
+            .nav-menu {
+                display: none; /* 모바일에서는 메뉴 숨김 */
+            }
+            .header-cta {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            #hero p { font-size: 1.2rem; }
+            .btn { width: 100%; display: block; text-align: center; }
+            .btn-secondary { margin: 15px 0 0 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================= -->
+    <!-- 헤더: 네비게이션 -->
+    <!-- ============================================= -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">그로우소울</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#hero">홈</a></li>
+                    <li><a href="#problem">문제점</a></li>
+                    <li><a href="#solution">해결방법</a></li>
+                    <li><a href="#features">프로그램</a></li>
+                    <li><a href="#testimonials">후기</a></li>
+                </ul>
+            </nav>
+            <a href="#cta" class="header-cta">무료 상담 신청</a>
+        </div>
+    </header>
+
+    <!-- ============================================= -->
+    <!-- 히어로 섹션: 브랜드 각인 및 사용자 갈망 자극 -->
+    <!-- ============================================= -->
+    <section id="hero">
+        <div class="container">
+            <h1>더 이상 애쓰지 않아도 괜찮아요.<br>당신 안에 숨겨진 진짜 '나'를 만나는 시간</h1>
+            <p>반복되는 번아웃, 남들 눈치만 보는 일상에서 벗어나<br>내 마음의 소리를 듣고, 흔들리지 않는 편안함을 되찾으세요.</p>
+            <div>
+                <a href="#cta" class="btn btn-primary">무료 소책자 신청하기</a>
+                <a href="#cta" class="btn btn-secondary">1:1 컨설팅 문의하기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- 문제 제기 섹션: 고객 공감대 형성 -->
+    <!-- ============================================= -->
+    <section id="problem">
+        <div class="container">
+            <h2>혹시 당신도 이런 고민을 하고 있나요?</h2>
+            <div class="problem-cards">
+                <div class="problem-card">
+                    <div class="icon">😔</div>
+                    <h3>착한아이 증후군 & 번아웃</h3>
+                    <p>거절하지 못하고 모든 부탁을 들어주다<br>결국 지쳐버렸나요? 내 감정보다 타인의 시선이 더 중요한 것 같나요?</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon">🤔</div>
+                    <h3>낮은 자존감 & 자기 불신</h3>
+                    <p>스스로를 믿지 못하고 늘 불안한가요?<br>작은 실수에도 쉽게 무너지고, '나는 부족하다'는 생각에 사로잡혀 있나요?</p>
+                </div>
+                <div class="problem-card">
+                    <div class="icon">😶</div>
+                    <h3>무기력 & 감정 불감증</h3>
+                    <p>무엇을 해도 즐겁지 않고, 내가 뭘 원하는지 조차 모르겠나요? 기쁨도, 슬픔도 희미하게 느껴지나요?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- 해결 제안 섹션: 솔루션 시각화 -->
+    <!-- ============================================= -->
+    <section id="solution">
+        <div class="container">
+            <h2>무의식 정화, 3단계면 충분합니다</h2>
+            <div class="solution-flow">
+                <div class="solution-step">
+                    <div class="solution-box">
+                        <h3>Before: 마음의 짐</h3>
+                        <p>감정의 노예가 되어 타인에게 휘둘리고, 늘 불안과 무기력에 시달리는 상태</p>
+                    </div>
+                </div>
+                <div class="solution-step arrow">→</div>
+                <div class="solution-step">
+                    <div class="solution-box">
+                        <h3>1단계: 무의식 탐색</h3>
+                        <p>내 안에 숨겨진 진짜 감정과 상처를 마주하고, 그 원인을 이해합니다.</p>
+                    </div>
+                </div>
+                <div class="solution-step arrow">→</div>
+                <div class="solution-step">
+                    <div class="solution-box">
+                        <h3>After: 마음의 자유</h3>
+                        <p>스스로를 온전히 믿고 사랑하며, 어떤 상황에도 흔들리지 않는 내면의 평화를 얻습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- 기능 및 혜택 섹션: 프로그램 소개 -->
+    <!-- ============================================= -->
+    <section id="features">
+        <div class="container">
+            <h2>[마음부자 만들기]가 제공하는 핵심 가치</h2>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <h3>1:1 맞춤형 무의식 코칭</h3>
+                    <p>10년 경력 무의식 전문가가 당신의 무의식에 쌓인 감정의 뿌리를 함께 찾고, 해소할 수 있도록 안전하게 안내합니다. 더 이상 혼자 힘들어하지 마세요.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>체계적인 온라인 강의</h3>
+                    <p>언제 어디서든 내 속도에 맞춰 학습할 수 있는 온라인 강의를 제공합니다. 자존감, 감정조절, 인간관계 등 주제별 심화 학습으로 마음의 근육을 키워보세요.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>안전한 지지 커뮤니티</h3>
+                    <p>나와 비슷한 고민을 가진 사람들과 소통하며 서로를 응원하는 비밀 커뮤니티입니다. 따뜻한 지지와 공감 속에서 치유의 여정을 함께 걸어갑니다.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>평생 소장 가능한 실습 자료</h3>
+                    <p>일상에서 꾸준히 마음을 돌볼 수 있도록 명상, 감정일기 등 다양한 실습 워크시트와 가이드를 제공합니다. 프로그램이 끝나도 스스로를 지킬 힘을 기를 수 있습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- 후기 섹션: 사회적 증거 제시 -->
+    <!-- ============================================= -->
+    <section id="testimonials">
+        <div class="container">
+            <h2>먼저 경험한 분들의 생생한 이야기</h2>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <p>"늘 남들 기준에 맞춰 사느라 정작 제 자신을 잃어버렸었어요. 코칭을 받으며 처음으로 제 마음의 소리를 들을 수 있었고, 이제는 누가 뭐래도 제 선택을 믿고 나아갈 수 있게 되었어요. 제 인생의 전환점입니다."</p>
+                    <div class="author">- 김OO (34세, 마케터)</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"만성 번아웃으로 매일 아침 눈 뜨는 게 고통이었는데, 무의식에 억눌려 있던 감정들을 풀어내고 나니 신기할 정도로 몸과 마음이 가벼워졌습니다. 예전의 저처럼 힘들어하는 분들께 강력히 추천하고 싶어요."</p>
+                    <div class="author">- 이OO (38세, 디자이너)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- 콜투액션(CTA) 섹션: 최종 전환 유도 -->
+    <!-- ============================================= -->
+    <section id="cta">
+        <div class="container">
+            <h2>이제, 당신의 마음을 돌볼 시간입니다</h2>
+            <p>작은 용기가 인생을 바꾸는 시작이 될 수 있습니다.<br>더 이상 망설이지 말고, 진정한 마음의 자유를 향한 첫걸음을 내딛어 보세요.</p>
+            <a href="#" class="btn btn-primary">1:1 컨설팅 바로 신청하기</a>
+        </div>
+    </section>
+
+    <!-- ============================================= -->
+    <!-- 푸터: 회사 정보 -->
+    <!-- ============================================= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">이용약관</a>
+                <a href="#">개인정보처리방침</a>
+                <a href="#">SNS</a>
+            </div>
+            <p>마음부자연구소 | 대표: OOO | 사업자등록번호: 123-45-67890<br>
+            주소: 서울특별시 마음구 행복동 123-45 | 이메일: contact@maumbuja.com</p>
+            <div class="copyright">
+                © 2025 MaumBuja. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('section');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // 섹션이 10% 보일 때 애니메이션 실행
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+
+</body>
+</html>
